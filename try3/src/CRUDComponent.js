@@ -14,6 +14,12 @@ function CRUDComponent() {
 	useEffect( () => {
 		const data = [];
 
+		const tfoot = $( '#table tfoot td:not( .options )' );
+		tfoot.each( function () {
+			var title = $( this ).text();
+			$( this ).html( '<input class="form-control form-control-sm" type="text" placeholder="Buscar en ' + title + '" />' );
+		} );
+
 		$( table.current ).DataTable( {
 			"ajax": function( data, callback, settings ) {
 				$.ajax( {
@@ -40,12 +46,27 @@ function CRUDComponent() {
 			"paging": true,
 			"processing": true,
 			"serverSide": true,
+			"initComplete": function() {
+				this.api().columns().every( function () {
+					const that = this;
+
+					$( 'input', this.footer() ).on( 'keyup change', function() {
+						if ( that.search() !== this.value ) {
+							that
+							.search( this.value )
+							.draw();
+						}	// end if
+					} );
+				} );
+			},
 		} );
 	}, [] );
 
 	return (
 		<div className="CRUDComponent container">
 			<h1 className="display-5 my-3">CRUDComponent</h1>
+
+			<hr />
 
 			<table ref={table} id="table" className="table">
 				<thead>
@@ -56,7 +77,16 @@ function CRUDComponent() {
 						<th>Fecha de creación</th>
 					</tr>
 				</thead>
+				<tfoot>
+					<tr>
+						<td>ID</td>
+						<td>Nombre</td>
+						<td>Apellido Paterno</td>
+						<td>Fecha de creación</td>
+					</tr>
+				</tfoot>
 			</table>
+			<hr />
 		</div>
 	);
 }
