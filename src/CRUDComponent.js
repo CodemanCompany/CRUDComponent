@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import $ from 'jquery';
 import './CRUDComponent.css';
-import 'datatables.net'
+import 'datatables.net';
+import { tab } from '@testing-library/user-event/dist/tab';
 
 function CRUDComponent() {
 	// $.DataTable = require( 'datatables.net' );
 
+	const table = useRef();
 	let active = 1;
 
 	useEffect( () => {
-		if( active )
-		$( '#table' ).DataTable( {
+		if( active ) {
+			console.log($( table.current ));
+			// $( table.current ).DataTable().destroy()
+			$( table.current ).DataTable( {
 			"aaSorting": [ [ 1, "desc" ] ] ,
 			"ajax": function( data, callback, settings ) {
 				$.ajax( {
@@ -42,28 +46,11 @@ function CRUDComponent() {
 				[ 10, 25, 50, 100, "Todos" ],
 			],
 			"columns": [
-				// {
-				// 	"data": null,
-				// 	"orderable": false,
-				// 	"render": ( data, type, row ) => {
-				// 		const dataString = escape( JSON.stringify( data ) );
-				// 		return `<button class="btn btn-sm update-modal" type="button" data-params="${dataString}">
-				// 			<i class="la la-edit"></i> Editar
-				// 		</button>
-				// 		<button class="btn btn-sm delete-modal" type="button" data-params="${dataString}">
-				// 			<i class="la la-trash"></i> Eliminar
-				// 		</button>`;
-				// 	},
-				// 	"searchable": false,
-				// 	"sortable": false,
-				// 	"targets": 0,
-				// },
-				{ "data": "id", "width": 150 },
+				{ "data": "id" },
 				{ "data": "name" },
 				{ "data": "last_name" },
-				// { "data": "email" },
 			],
-			"dom": 'Blfrtip',
+			// "dom": 'Blfrtip',
 			"buttons": [
 				{
 					"bom": true,
@@ -77,28 +64,11 @@ function CRUDComponent() {
 					"text": '<i class="far fa-file-excel"></i> Exportar a CSV',
 				},
 			],
-			// "language": request.lang,
 			"pageLength": 10,
 			"processing": true,
-			// Scrollable
-			"scrollCollapse": true,
-			"scrollX": true,
-			"scrollY": "50vh",
 			"serverSide": true,
-			// "initComplete": function() {
-			// 	this.api().columns().every( function () {
-			// 		const that = this;
-
-			// 		$( 'input', this.footer() ).on( 'keyup change', function() {
-			// 			if ( that.search() !== this.value ) {
-			// 				that
-			// 				.search( this.value )
-			// 				.draw();
-			// 			}	// end if
-			// 		} );
-			// 	} );
-			// },
 		} );
+		}	// end if
 		active = 0;
 	}, [] );
 
@@ -107,7 +77,7 @@ function CRUDComponent() {
 		<div className="CRUDComponent container">
 			<h1 className="display-5 my-3">CRUDComponent</h1>
 
-			<table id="table" className="table">
+			<table ref={table} id="table" className="table">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -115,15 +85,6 @@ function CRUDComponent() {
 						<th>Apellido Paterno</th>
 					</tr>
 				</thead>
-				<tbody>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td>ID</td>
-						<td>Nombre</td>
-						<td>Apellido Paterno</td>
-					</tr>
-				</tfoot>
 			</table>
 		</div>
 	);
