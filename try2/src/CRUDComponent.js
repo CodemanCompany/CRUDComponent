@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './CRUDComponent.css';
 import $ from 'jquery';
+// import 'datatables.net';
 import 'datatables.net-bs5';
 
 // Styles
@@ -8,83 +9,84 @@ import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
 
 function CRUDComponent() {
 
-	const data = [
-		{
-			"id": 1,
-			"name": "Gustavo",
-			"last_name": "Martinez",
-			"created_at": "2022-11-22 18:27:03",
-		},
-		{
-			"id": 2,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 3,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 4,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 5,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 6,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 7,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 8,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 9,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 10,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 11,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-		{
-			"id": 12,
-			"name": "Mateo",
-			"last_name": "Bernal",
-			"created_at": "2022-11-23 08:27:03",
-		},
-	];
 	const table = useRef();
 
 	useEffect( () => {
+		const data = [
+			{
+				"id": 1,
+				"name": "Gustavo",
+				"last_name": "Martinez",
+				"created_at": "2022-11-22 18:27:03",
+			},
+			{
+				"id": 2,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 3,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 4,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 5,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 6,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 7,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 8,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 9,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 10,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 11,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+			{
+				"id": 12,
+				"name": "Mateo",
+				"last_name": "Bernal",
+				"created_at": "2022-11-23 08:27:03",
+			},
+		];
+
 		$( table.current ).DataTable( {
 			"columns": [
 				{ "data": "id" },
